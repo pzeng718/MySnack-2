@@ -39,6 +39,7 @@ public class AllProductsServlet extends HttpServlet {
             String viewQuery = "select p.id, p.name, p.price, p.qty, p.description, p.manufacturer, group_concat(imgSrc) as images " +
                     "from products as p, images as i where p.id = i.product_id group by p.id;";
 
+
             PreparedStatement statement = dbcon.prepareStatement(viewQuery);
             ResultSet rs = statement.executeQuery();
 

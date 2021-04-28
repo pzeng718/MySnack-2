@@ -7,7 +7,7 @@
               auth="Container"
               driverClassName="com.mysql.jdbc.Driver"
               type="javax.sql.DataSource"
-              username="mytestuser"
-              password="My6$Password"
+              username="root"
+              password="123456"
               url="jdbc:mysql://localhost:3306/mysnack"/>
 </Context>
