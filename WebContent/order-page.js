@@ -1,5 +1,3 @@
-import {products} from "./index.js";
-
 let url = new URL(window.location.href);
 
 let product_id = parseInt(url.searchParams.get("product_id"));

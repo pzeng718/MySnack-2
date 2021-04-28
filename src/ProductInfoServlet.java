@@ -21,9 +21,6 @@ import java.sql.ResultSet;
 public class ProductInfoServlet extends HttpServlet {
     private DataSource dataSource;
 
-
-
-
     public void init(ServletConfig config){
         try{
             dataSource = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/mysnack");
@@ -37,11 +34,11 @@ public class ProductInfoServlet extends HttpServlet {
 
         PrintWriter out = response.getWriter();
         String productID = request.getParameter("product_id"); //get the id from the url
+        System.out.println(productID);
         try{
             Connection con = dataSource.getConnection();
             String productQuery = "select p.id, p.name, p.price, p.qty, p.description, p.manufacturer, group_concat(imgSrc) as images " +
                     "from products as p, images as i where p.id = i.product_id and p.id = ?;";
-
 
             PreparedStatement ps = con.prepareStatement(productQuery);
             ps.setString(1, productID);
@@ -55,6 +52,10 @@ public class ProductInfoServlet extends HttpServlet {
                 String description = result.getString("description");
                 String manufacturer = result.getString("manufacturer");
                 String images = result.getString("images");
+
+                System.out.println(id);
+                System.out.println(name);
+                System.out.println(price);
 
 
                 jsonProductObject.addProperty("id", id);
