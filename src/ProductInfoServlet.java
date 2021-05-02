@@ -53,11 +53,6 @@ public class ProductInfoServlet extends HttpServlet {
                 String manufacturer = result.getString("manufacturer");
                 String images = result.getString("images");
 
-                System.out.println(id);
-                System.out.println(name);
-                System.out.println(price);
-
-
                 jsonProductObject.addProperty("id", id);
                 jsonProductObject.addProperty("name", name);
                 jsonProductObject.addProperty("price", price);

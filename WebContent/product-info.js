@@ -24,14 +24,11 @@ function handleResult(resultDataString) {
     let item_mnf = resultDataString.manufacturer;
     let item_imgs = resultDataString.images.split(",");
 
-
     let productNameBody = $("#productName");
     let infoBody = $(".info");
-    let orderBtnBody = $(".order-btn");
-
+    let addToCartBody = $(".add-to-cart");
 
     productNameBody.append(`<i>${item_name}</i>`);
-
 
     infoBody.append(`<img src=${item_imgs[0]}>`);
     infoBody.append(`<img src=${item_imgs[1]}>`);
@@ -45,7 +42,33 @@ function handleResult(resultDataString) {
     );
     infoBody.append(`<p>- <i>${item_description}</i></p>`);
 
-    orderBtnBody.append(`<button type="submit">Order this product</button>`);
+    let addToCartHTML = `<form action='#' id="add-to-cart-form">` +
+        `<input value=${resultDataString.id} name='productId' type="hidden">` +
+        `<input value=${resultDataString.price} name='price' type="hidden">` +
+        `<input value=${resultDataString.name} name='name' type="hidden">` +
+        '<select class="form-select" name="qtySelected" id="inputGroupSelect04" aria-label="Example select with button addon" style="width: 150px; display: inline">';
+    for(let qty = 1; qty <= parseInt(item_quantity); qty++){
+        addToCartHTML += `<option value=${qty}>${qty}</option>`;
+    }
+    addToCartHTML += '</select>' +
+    `<button type="submit" style="display: inline">Add to Cart</button>` +
+    `</form>`;
+
+    addToCartBody.append(addToCartHTML);
+    let addToCartFormBody = $("#add-to-cart-form");
+    addToCartFormBody.submit(cartEvent => {
+        cartEvent.preventDefault();
+        console.log(addToCartFormBody.serialize());
+
+        $.ajax("shopping-cart", {
+            method: "POST",
+            data: addToCartFormBody.serialize(),
+            success: (resultData) =>{
+                console.log(resultData)
+                alert("Item added successfully")
+            }
+        })
+    })
 }
 
 
