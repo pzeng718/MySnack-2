@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping Cart</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container px-4" style="width: 70%">
+        <h2>All Items:</h2>
+        <div class="shopping-cart"></div>
+        <h2 style="text-align: center">
+            Order form
+        </h2>
+        <div class="product-image"></div>
+        <form action="" class="order-form" id="order-form">
+            <div class="user-details">
+                <div class="input-box me-3 mt-2" style="width: 300px; display: inline-block">
+                    <label for="firstname" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="firstname" aria-describedby="first name"
+                           placeholder="Enter your first name here" name="firstname" required minlength="3">
+                    <!--<p id="firstname-message"></p>-->
+                </div>
+                <div class="input-box mt-2" style="width: 300px; display: inline-block">
+                    <label for="lastname" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="lastname" aria-describedby="last name"
+                           placeholder="Enter your last name here" name="lastname" required minlength="3">
+                </div>
+                <div class="input-box mt-2" style="width: 500px;">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" aria-describedby="email"
+                           placeholder="abcd@efg.com" name="email" required minlength="3">
+                </div>
+                <!-------------------------------Shipping information ------------------------------------->
+                <h5 style="font-size: 25px" class="mt-2">Shipping Information</h5>
+                <div class="shipping-details">
+                    <div class="input-box me-3 mt-2" style="width: 600px; display: inline-block">
+                        <label for="street" class="form-label">Shipping Address</label>
+                        <input type="text" class="form-control" id="street" aria-describedby="street"
+                               placeholder="Ex: 1234 University Drive" name="street" required minlength="3">
+                    </div>
+                    <div class="input-box mt-2" style="width: 250px; display: inline-block">
+                        <label for="city" class="form-label">City Name</label>
+                        <input type="text" class="form-control" id="city" aria-describedby="city"
+                               placeholder="Ex: Irvine" name="city" required minlength="3">
+                    </div>
+                    <div class="input-box mt-2" style="width: 600px">
+                        <label for="state" class="form-label">State: </label>
+                        <select name="state" id="state" class="form-select">
+                            <option value="AL">Alabama</option>
+                            <option value="AK">Alaska</option>
+                            <option value="AZ">Arizona</option>
+                            <option value="AR">Arkansas</option>
+                            <option value="CA">California</option>
+                            <option value="CO">Colorado</option>
+                            <option value="CT">Connecticut</option>
+                            <option value="DE">Delaware</option>
+                            <option value="DC">District Of Columbia</option>
+                            <option value="FL">Florida</option>
+                            <option value="GA">Georgia</option>
+                            <option value="HI">Hawaii</option>
+                            <option value="ID">Idaho</option>
+                            <option value="IL">Illinois</option>
+                            <option value="IN">Indiana</option>
+                            <option value="IA">Iowa</option>
+                            <option value="KS">Kansas</option>
+                            <option value="KY">Kentucky</option>
+                            <option value="LA">Louisiana</option>
+                            <option value="ME">Maine</option>
+                            <option value="MD">Maryland</option>
+                            <option value="MA">Massachusetts</option>
+                            <option value="MI">Michigan</option>
+                            <option value="MN">Minnesota</option>
+                            <option value="MS">Mississippi</option>
+                            <option value="MO">Missouri</option>
+                            <option value="MT">Montana</option>
+                            <option value="NE">Nebraska</option>
+                            <option value="NV">Nevada</option>
+                            <option value="NH">New Hampshire</option>
+                            <option value="NJ">New Jersey</option>
+                            <option value="NM">New Mexico</option>
+                            <option value="NY">New York</option>
+                            <option value="NC">North Carolina</option>
+                            <option value="ND">North Dakota</option>
+                            <option value="OH">Ohio</option>
+                            <option value="OK">Oklahoma</option>
+                            <option value="OR">Oregon</option>
+                            <option value="PA">Pennsylvania</option>
+                            <option value="RI">Rhode Island</option>
+                            <option value="SC">South Carolina</option>
+                            <option value="SD">South Dakota</option>
+                            <option value="TN">Tennessee</option>
+                            <option value="TX">Texas</option>
+                            <option value="UT">Utah</option>
+                            <option value="VT">Vermont</option>
+                            <option value="VA">Virginia</option>
+                            <option value="WA">Washington</option>
+                            <option value="WV">West Virginia</option>
+                            <option value="WI">Wisconsin</option>
+                            <option value="WY">Wyoming</option>
+                        </select>
+                    </div>
+                    <div class="input-box mt-2" style="width: 600px">
+                        <label for="shipping-method" class="form-label details">Shipping method</label>
+                        <select name="shipping-method" id="shipping-method" class="form-select">
+                            <option value="sameday">Same day Shipping -- $9.99</option>
+                            <option value="overnight">Overnight Shipping -- $5.99</option>
+                            <option value="2-day">2-day Shipping -- $1.99</option>
+                            <option value="standard">Standard Shipping -- Free</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!------------------------- Card Information----------------------->
+                <h5 style="font-size: 25px" class="mt-2">Card Information</h5>
+                <div class="card-info">
+                    <div class="input-box" style="width: 250px;">
+                        <label for="card-name" class="form-label">Name On Card</label>
+                        <input type="text" class="form-control" id="card-name" aria-describedby="card name"
+                               placeholder="Full Name on card" name="card-name" required minlength="3">
+                    </div>
+                    <div class="input-box mt-2" style="width: 300px;">
+                        <label for="card-number" class="form-label">Card Number</label>
+                        <input type="text" class="form-control" id="card-number" aria-describedby="card number"
+                               placeholder="XXXX XXXX XXXX XXXX" name="card-number" required minlength="16">
+                    </div>
+                    <div class="input-box mt-2" style="width: 300px;">
+                        <label for="expire-date" class="form-label">Expiration Date</label>
+                        <input type="text" class="form-control" id="expire-date" aria-describedby="expire-date"
+                               placeholder="mm/yy" name="expire-date" required>
+                    </div>
+                    <div class="input-box mt-2" style="width: 300px;">
+                        <label for="cvv" class="form-label">CVV</label>
+                        <input type="text" class="form-control" id="cvv" aria-describedby="expire-date"
+                               placeholder="Ex: 123" name="cvv" required minlength="3">
+                    </div>
+                </div>
+                <div style="position: relative" class="mt-5">
+                    <a onclick="goBack()" class="btn btn-primary" style="margin: 0; position: absolute;left: 40%;-ms-transform: translateX(-50%);transform: translateX(-50%);">Back</a>
+                    <button type="submit" class="btn btn-success" style="margin: 0; position: absolute;left: 50%;-ms-transform: translateX(-50%);transform: translateX(-50%);">
+                        Confirm Order
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="shopping-cart.js"></script>
+    <script>
+        let form = $(".order-form");
+        form.submit((cartEvent) => {
+            cartEvent.preventDefault();
+
+            $.ajax("checkout", {
+                method: "POST",
+                data: form.serialize(),
+                success: () => {
+                    window.location.href = "OrderDetailServlet"
+                }
+            })
+        })
+
+        function goBack(){
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

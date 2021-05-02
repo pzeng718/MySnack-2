@@ -15,7 +15,6 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 @WebServlet(name = "AllProductsServlet", urlPatterns = "/all-products")
 public class AllProductsServlet extends HttpServlet {
@@ -29,7 +28,6 @@ public class AllProductsServlet extends HttpServlet {
         }
     }
 
-    //
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json");
 
@@ -39,10 +37,8 @@ public class AllProductsServlet extends HttpServlet {
             String viewQuery = "select p.id, p.name, p.price, p.qty, p.description, p.manufacturer, group_concat(imgSrc) as images " +
                     "from products as p, images as i where p.id = i.product_id group by p.id;";
 
-
             PreparedStatement statement = dbcon.prepareStatement(viewQuery);
             ResultSet rs = statement.executeQuery();
-
             JsonArray jsonArray = new JsonArray();
             while(rs.next()){
                 String id = rs.getString("id");
@@ -52,7 +48,6 @@ public class AllProductsServlet extends HttpServlet {
                 String description = rs.getString("description");
                 String manufacturer = rs.getString("manufacturer");
                 String images = rs.getString("images");
-
                 JsonObject jsonObject = new JsonObject();
                 jsonObject.addProperty("id", id);
                 jsonObject.addProperty("name", name);
@@ -64,7 +59,6 @@ public class AllProductsServlet extends HttpServlet {
 
                 jsonArray.add(jsonObject);
             }
-
             out.write(jsonArray.toString());
 
             response.setStatus(200);
