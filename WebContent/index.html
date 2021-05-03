@@ -2,126 +2,164 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <script src="https://kit.fontawesome.com/3957f95a4e.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="index.css"/>
+    <link rel="stylesheet" href="order-history.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <title>mySnack</title>
 </head>
 <body>
-    <!-- Add the navbar under here -->
-    <div id="navbar">
-      <div class="hamburger-menu-wrapper">
+<!-- Add the navbar under here -->
+<div id="navbar">
+    <div class="hamburger-menu-wrapper">
         <a
-          href="javascript:void(0);"
-          onclick="onHamburgerMenuClick()"
+                href="javascript:void(0);"
+                onclick="onHamburgerMenuClick()"
         >
-        <i class="fas fa-bars hamburger-menu-icon">
-        </i>
-      </a>
-      </div>
-      <div class="navbar-items-wrapper navbar-items-wrapper--responsive">
+            <i class="fas fa-bars hamburger-menu-icon">
+            </i>
+        </a>
+    </div>
+    <div class="navbar-items-wrapper navbar-items-wrapper--responsive">
         <ul id="navbar-items">
-          <li><a href="../src/index.html">Home</a></li>
-          <li><a href="../src/index.html#product">Products</a></li>
-          <li><a href="../src/index.html#about">About</a></li>
-          <li><a href="../src/index.html#contact">Contact</a></li>
+            <li><a href="../src/index.html">Home</a></li>
+            <li><a href="../src/index.html#product">Products</a></li>
+            <li><a href="../src/index.html#about">About</a></li>
+            <li><a href="../src/index.html#contact">Contact</a></li>
         </ul>
-      </div>
     </div>
+</div>
 
-    <!-------------------Banner section----------------->
-    <div id="banner"></div>
+<!-------------------Banner section----------------->
+<div id="banner"></div>
 
-    <!-------------------Product section--------------------->
-    <div class="Product" id="product">
-      <h1 style="text-align:center; margin-top: 2rem; letter-spacing: 1rem;">PRODUCTS</h1>
-      <h3 style="text-align:center; margin-top: 2rem;">Click on the images for more information about the product</h3>
+<!-------------------Product section--------------------->
+<div class="Product" id="product">
+    <h1 style="text-align:center; margin-top: 2rem; letter-spacing: 1rem;">PRODUCTS</h1>
+    <h3 style="text-align:center; margin-top: 2rem;">Click on the images for more information about the product</h3>
+</div>
+
+<!------------------------------- Order History---------------------------->
+<div class="order-user-container">
+    <h2 style="text-align: center">Most recently bought items</h2>
+    <div class="row">
+        <div class="col-sm">
+            <div class="order-product-title">Product Name</div>
+        </div>
+        <div class="col-sm">
+            <div class="order-product-unit-price">Unit Price</div>
+        </div>
+<!--        <div class="col-sm">-->
+<!--            <div class="order-product-selected-amount">Selected Amount</div>-->
+<!--        </div>-->
+<!--        <div class="col-sm">-->
+<!--            <div class="order-product-bought">Bought On</div>-->
+<!--        </div>-->
+<!--        <div class="col-sm">-->
+<!--            <div class="order-product-total-price">Order Total Price</div>-->
+<!--        </div>-->
+<!--        <div class="col-sm">-->
+<!--            <div class="order-product-shipping-address">Shipping Address</div>-->
+<!--        </div>-->
+<!--        <div class="col-sm">-->
+<!--            <div class="order-product-shipping-method">Shipping Method</div>-->
+<!--        </div>-->
     </div>
+</div>
 
-    <!-------------------About section----------------->
-    <div id="about">
-        <h2 class="section-heading">ABOUT US</h2>
-        <p class="section-sub-heading">Live colorfully</p>
-        <p class="about-description">
-            We're a small company focused on providing different quality types of snacks
-            for people. With our services, people can enjoy their favorite snacks.
-            We guarantee to bring satisfaction to any customer that we serve. 
-            We fulfill your hunger with just a click. 
-        </p>
+<!-------------------About section----------------->
+<div id="about">
+    <h2 class="section-heading">ABOUT US</h2>
+    <p class="section-sub-heading">Live colorfully</p>
+    <p class="about-description">
+        We're a small company focused on providing different quality types of snacks
+        for people. With our services, people can enjoy their favorite snacks.
+        We guarantee to bring satisfaction to any customer that we serve.
+        We fulfill your hunger with just a click.
+    </p>
 
-        <!------------------------Team Section------------------>
-        <div class="team-list" id="team">
-            <div class="list-item">
-                <img src="resource/minion.jpg" alt="Photo of Bam" class="team-image" />
-                <h3 class="member-name">Peter Zeng</h3>
-                <p class="member-descript">
-                <h4>Software Engineering</h4>
-                <h5><i class="fas fa-graduation-cap"></i> 72842271</h5>
-                <h5><a href="mailto: peifanz@uci.edu"><i class="fas fa-envelope"></i> peifanz@uci.edu</a></h5>
-                </p>
-            </div>
-            <div class="list-item">
-                <img src="resource/minion.jpg" alt="Photo of Mark" class="team-image" />
-                <h3 class="member-name">Eric Chen</h3>
-                <p class="member-descript">
-                <h4>Software Engineering</h4>
-                <h5><i class="fas fa-graduation-cap"></i> 63859984</h5>
-                <h5><a href="mailto: dongpc@uci.edu"><i class="fas fa-envelope"></i> dongpc@uci.edu</a></h5>
-                </p>
-            </div>
-            <div class="list-item">
-                <img src="resource/minion.jpg" alt="Photo of Jaebeom" class="team-image" />
-                <h3 class="member-name">Joey Le</h3>
-                <p class="member-descript">
-                <h4>Software Engineering</h4>
-                <h5><i class="fas fa-graduation-cap"></i> 21142455</h5>
-                <h5><a href="mailto: ngockl@uci.edu"><i class="fas fa-envelope"></i> ngockl@uci.edu</a></h5>
-                </p>
+    <!------------------------Team Section------------------>
+    <div class="team-list" id="team">
+        <div class="list-item">
+            <img src="resource/minion.jpg" alt="Photo of Bam" class="team-image"/>
+            <h3 class="member-name">Peter Zeng</h3>
+            <p class="member-descript">
+            <h4>Software Engineering</h4>
+            <h5><i class="fas fa-graduation-cap"></i> 72842271</h5>
+            <h5><a href="mailto: peifanz@uci.edu"><i class="fas fa-envelope"></i> peifanz@uci.edu</a></h5>
+            </p>
+        </div>
+        <div class="list-item">
+            <img src="resource/minion.jpg" alt="Photo of Mark" class="team-image"/>
+            <h3 class="member-name">Eric Chen</h3>
+            <p class="member-descript">
+            <h4>Software Engineering</h4>
+            <h5><i class="fas fa-graduation-cap"></i> 63859984</h5>
+            <h5><a href="mailto: dongpc@uci.edu"><i class="fas fa-envelope"></i> dongpc@uci.edu</a></h5>
+            </p>
+        </div>
+        <div class="list-item">
+            <img src="resource/minion.jpg" alt="Photo of Jaebeom" class="team-image"/>
+            <h3 class="member-name">Joey Le</h3>
+            <p class="member-descript">
+            <h4>Software Engineering</h4>
+            <h5><i class="fas fa-graduation-cap"></i> 21142455</h5>
+            <h5><a href="mailto: ngockl@uci.edu"><i class="fas fa-envelope"></i> ngockl@uci.edu</a></h5>
+            </p>
 
-            </div>
         </div>
     </div>
+</div>
 
-    <!-------------------------------Contact---------------------------->
-    <div id="contact">
-        <div class="contact-section">
-          <div class="contact-list">
+
+
+<!-------------------------------Contact---------------------------->
+<div id="contact">
+    <div class="contact-section">
+        <div class="contact-list">
             <h2 class="section-heading">CONTACT</h2>
             <p class="section-sub-heading">Wanna keep in touch? Drop a note!</p>
             <div class="contact-item">
-              <p><i class="fas fa-map-marker-alt"></i>Irvine, California</p>
-              <p><i class="fas fa-phone-alt"></i>Phone: +1(949)824-5011</p>
-              <p><i class="fas fa-envelope"></i>Email: mail@mail.com</p>
+                <p><i class="fas fa-map-marker-alt"></i>Irvine, California</p>
+                <p><i class="fas fa-phone-alt"></i>Phone: +1(949)824-5011</p>
+                <p><i class="fas fa-envelope"></i>Email: mail@mail.com</p>
             </div>
             <div class="contact-item form">
-              <form action="">
-                <div class="row">
-                  <div class="first-half-col">
-                    <input type="text" name="" placeholder="Name" required class="form-control">
-                  </div>
-                  <div class="second-half-col">
-                    <input type="email" name="" placeholder="Email" required class="form-control">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="full-col">
-                    <input type="text" name="" placeholder="Message" required class="form-control">
-                  </div>
-                  <input class="sendbtn" type="submit" value="SEND">
-                </div>
-              </form>
+                <form action="">
+                    <div class="row">
+                        <div class="first-half-col">
+                            <input type="text" name="" placeholder="Name" required class="form-control">
+                        </div>
+                        <div class="second-half-col">
+                            <input type="email" name="" placeholder="Email" required class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="full-col">
+                            <input type="text" name="" placeholder="Message" required class="form-control">
+                        </div>
+                        <input class="sendbtn" type="submit" value="SEND">
+                    </div>
+                </form>
             </div>
-          </div>
-      </div>
+        </div>
     </div>
-    <!-------------------------------Contact---------------------------->
-    <footer>
-        <p>&copy; PEJ 2021 | All rights reserved</p>
-      </footer>
+</div>
+<!------------------------------- End Contact---------------------------->
+
+
+
+<footer>
+    <p>&copy; PEJ 2021 | All rights reserved</p>
+</footer>
 </body>
 
-<script type ="module" src="./index.js"></script>
+<script type="module" src="./index.js"></script>
+<script type="module" src="order-history.js"></script>
 
 </html>

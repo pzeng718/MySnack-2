@@ -10,9 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -48,7 +46,7 @@ public class CheckoutServlet extends HttpServlet {
                     "select * from (select ?, ?, ?) as tmp \n" +
                     "where not exists (select * from users as u where u.user_email = ? and u.user_firstname = ? and u.user_lastname = ?);";
 
-            PreparedStatement userStatement = dbcon.prepareStatement(insertUsersQuery);
+            PreparedStatement userStatement = dbcon.prepareStatement(insertUsersQuery, Statement.RETURN_GENERATED_KEYS);
             userStatement.setString(1, request.getParameter("email"));
             userStatement.setString(2, request.getParameter("firstname"));
             userStatement.setString(3, request.getParameter("lastname"));
@@ -57,6 +55,13 @@ public class CheckoutServlet extends HttpServlet {
             userStatement.setString(6, request.getParameter("lastname"));
 
             userStatement.executeUpdate();
+            ResultSet rs = userStatement.getGeneratedKeys();
+            if(rs.next()) {
+                int last_inserted_id = rs.getInt(1);
+                session.setAttribute("user_id", last_inserted_id);
+                System.out.println("last inesrted id " + last_inserted_id);
+            }
+
 
             // Insert into order user table
             String insertOrderQuery = "insert into order_user(user_id, created_at, order_total_price, order_shipping_method, order_shipping_address)\n" +
@@ -83,6 +88,11 @@ public class CheckoutServlet extends HttpServlet {
 
                 orderDetailStatement.executeUpdate();
             }
+
+            session.setAttribute("user_email", email);
+            session.setAttribute("user_firstname", firstName);
+            session.setAttribute("user_lastname", lastName);
+
 
             RequestDispatcher rd = request.getRequestDispatcher("/OrderDetailServlet");
             rd.forward(request, response);
