@@ -3,12 +3,14 @@ import com.google.gson.JsonObject;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -59,7 +61,19 @@ public class AllProductsServlet extends HttpServlet {
 
                 jsonArray.add(jsonObject);
             }
+            out.write('[');
             out.write(jsonArray.toString());
+
+            HttpSession session = request.getSession();
+            Integer userIdSession = (Integer) session.getAttribute("user_id");
+            System.out.println("userIdSession" + userIdSession);
+            if (userIdSession != null) {
+                out.write(',');
+                RequestDispatcher reqDispatcher = request.getRequestDispatcher("/order-history");
+                reqDispatcher.include(request, response);
+            }
+            System.out.println("done123");
+            out.write(']');
 
             response.setStatus(200);
 
@@ -78,4 +92,6 @@ public class AllProductsServlet extends HttpServlet {
         }
 
     }
+
+
 }
