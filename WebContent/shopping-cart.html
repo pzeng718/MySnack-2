@@ -102,7 +102,7 @@
                     </div>
                     <div class="input-box mt-2" style="width: 600px">
                         <label for="shipping-method" class="form-label details">Shipping method</label>
-                        <select name="shipping-method" id="shipping-method" class="form-select">
+                        <select name="shipping-method" id="shipping-method" class="form-select" onchange="updateShippingPrice()">
                             <option value="sameday">Same day Shipping -- $9.99</option>
                             <option value="overnight">Overnight Shipping -- $5.99</option>
                             <option value="2-day">2-day Shipping -- $1.99</option>
@@ -162,6 +162,23 @@
 
         function goBack(){
             window.history.back();
+        }
+
+        function updateShippingPrice(){
+            let shippingMethod = $("#shipping-method").val();
+            let shippingCost = {
+                "sameday": 9.99,
+                "overnight": 5.99,
+                "2-day": 1.99,
+                "standard": 0
+        }
+            let totalPriceBody = $("#total-price");
+            console.log(totalPriceBody)
+            let productTotalPrice = parseFloat($("#product-total-price").val());
+            totalPriceBody.empty();
+            let totalPriceHtml = `${(productTotalPrice + shippingCost[shippingMethod]).toFixed(2)}`;
+            totalPriceBody.append(totalPriceHtml);
+            console.log(totalPriceHtml)
         }
     </script>
 </body>

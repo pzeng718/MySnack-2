@@ -92,7 +92,9 @@ public class CheckoutServlet extends HttpServlet {
             session.setAttribute("user_email", email);
             session.setAttribute("user_firstname", firstName);
             session.setAttribute("user_lastname", lastName);
+            items.clear();
 
+            session.setAttribute("items", items);
 
             RequestDispatcher rd = request.getRequestDispatcher("/OrderDetailServlet");
             rd.forward(request, response);

@@ -30,7 +30,8 @@ function handleShowShoppingCart(resultData){
     }
 
     itemHTML += '</tbody></table>';
-    itemHTML += `<h4 style="text-align: right">Total Price: $${totalPrice.toFixed(2)}</h4>`
+    itemHTML += `<h4 style="text-align: right">Total Price: $<span id="total-price">${(totalPrice + 9.99).toFixed(2)}</span></h4>`
+    itemHTML += `<input type="hidden" value="${totalPrice.toFixed(2)}" id="product-total-price">`;
     shoppingCartBody.append(itemHTML);
 }
 
