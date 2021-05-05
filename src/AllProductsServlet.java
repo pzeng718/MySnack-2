@@ -66,7 +66,6 @@ public class AllProductsServlet extends HttpServlet {
 
             HttpSession session = request.getSession();
             Integer userIdSession = (Integer) session.getAttribute("user_id");
-            System.out.println("userIdSession" + userIdSession);
             if (userIdSession != null) {
                 out.write(',');
                 RequestDispatcher reqDispatcher = request.getRequestDispatcher("/order-history");

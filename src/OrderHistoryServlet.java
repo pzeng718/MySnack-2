@@ -60,7 +60,6 @@ public class OrderHistoryServlet extends HttpServlet {
             ResultSet result = ps.executeQuery();
             JsonArray jsonArr = new JsonArray();
             while(result.next()) {
-                System.out.println("result0 is " + result);
                 String productName = result.getString("name");
                 String productUnitPrice = result.getString("price");
                 String selectAmount = result.getString("selected_amount");

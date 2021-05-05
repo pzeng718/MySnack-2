@@ -41,11 +41,12 @@ function handleResult(resultDataString) {
         `<p>Manufactured by: <strong>${item_mnf}</strong></p>`
     );
     infoBody.append(`<p>- <i>${item_description}</i></p>`);
-
+    let name = resultDataString.name
+    name = encodeURIComponent(name.trim());
     let addToCartHTML = `<form action='#' id="add-to-cart-form">` +
         `<input value=${resultDataString.id} name='productId' type="hidden">` +
         `<input value=${resultDataString.price} name='price' type="hidden">` +
-        `<input value=${resultDataString.name} name='name' type="hidden">` +
+        `<input value=${name} name='name' type="hidden">` +
         '<select class="form-select" name="qtySelected" id="inputGroupSelect04" aria-label="Example select with button addon" style="width: 150px; display: inline">';
     for(let qty = 1; qty <= parseInt(item_quantity); qty++){
         addToCartHTML += `<option value=${qty}>${qty}</option>`;
@@ -62,9 +63,8 @@ function handleResult(resultDataString) {
 
         $.ajax("shopping-cart", {
             method: "POST",
-            data: addToCartFormBody.serialize(),
-            success: (resultData) =>{
-                console.log(resultData)
+            data: "action=addItem&" + addToCartFormBody.serialize(),
+            success: () => {
                 alert("Item added successfully")
             }
         })

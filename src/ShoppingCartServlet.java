@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -59,45 +60,44 @@ public class ShoppingCartServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
 
-        String productName = request.getParameter("name");
-        String productId = request.getParameter("productId");
-        String price = request.getParameter("price");
-        String qty = request.getParameter("qtySelected");
-
-        PrintWriter out = response.getWriter();
-
+        String action = request.getParameter("action");
         HashMap<String, ArrayList<String>> items = (HashMap<String, ArrayList<String>>) session.getAttribute("items");
-        if(items == null){
-            items = new HashMap<>();
-            ArrayList<String> itemInfo = new ArrayList<>();
-
-            itemInfo.add(productName);
-            itemInfo.add(price);
-            itemInfo.add(qty);
-
-            items.put(productId, itemInfo);
-            session.setAttribute("items", items);
+        if(action.equals("emptyCart")){
+            session.setAttribute("itemExists", false);
+            session.setAttribute("items", null);
         }else{
-            if(items.containsKey(productId)){
-                ArrayList<String> itemInfo = items.get(productId);
-                itemInfo.set(2, String.valueOf(Integer.parseInt(itemInfo.get(2)) + Integer.parseInt(qty)));
-            }else{
+            String productName = request.getParameter("name");
+            productName = URLDecoder.decode(productName, "UTF-8");
+
+            String productId = request.getParameter("productId");
+            String price = request.getParameter("price");
+            String qty = request.getParameter("qtySelected");
+
+            if(items == null){
+                items = new HashMap<>();
                 ArrayList<String> itemInfo = new ArrayList<>();
+
                 itemInfo.add(productName);
                 itemInfo.add(price);
                 itemInfo.add(qty);
 
                 items.put(productId, itemInfo);
+                session.setAttribute("items", items);
+            }else{
+                if(items.containsKey(productId)){
+                    ArrayList<String> itemInfo = items.get(productId);
+                    itemInfo.set(2, String.valueOf(Integer.parseInt(itemInfo.get(2)) + Integer.parseInt(qty)));
+                }else{
+                    ArrayList<String> itemInfo = new ArrayList<>();
+                    itemInfo.add(productName);
+                    itemInfo.add(price);
+                    itemInfo.add(qty);
+
+                    items.put(productId, itemInfo);
+                }
             }
         }
-        JsonObject responseJsonObject = new JsonObject();
-        Gson gson = new Gson();
-        JsonObject json = gson.toJsonTree(items).getAsJsonObject();
-        responseJsonObject.add("items", json);
 
-        out.write(responseJsonObject.toString());
-
-        out.close();
         response.setStatus(200);
     }
 }

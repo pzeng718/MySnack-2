@@ -55,27 +55,32 @@ public class CheckoutServlet extends HttpServlet {
             userStatement.setString(6, request.getParameter("lastname"));
 
             userStatement.executeUpdate();
-            ResultSet rs = userStatement.getGeneratedKeys();
-            if(rs.next()) {
-                int last_inserted_id = rs.getInt(1);
-                session.setAttribute("user_id", last_inserted_id);
-                System.out.println("last inesrted id " + last_inserted_id);
+
+            String getUserIdQuery = "select user_id from users where user_email = ? and user_firstname = ? and user_lastname = ?";
+            PreparedStatement userIdStatement = dbcon.prepareStatement(getUserIdQuery);
+            userIdStatement.setString(1, email);
+            userIdStatement.setString(2, firstName);
+            userIdStatement.setString(3, lastName);
+
+            ResultSet userIdResultSet = userIdStatement.executeQuery();
+
+            int userId = 0;
+            if(userIdResultSet.next()){
+                userId = userIdResultSet.getInt("user_id");
+                session.setAttribute("user_id", userId);
             }
 
 
             // Insert into order user table
             String insertOrderQuery = "insert into order_user(user_id, created_at, order_total_price, order_shipping_method, order_shipping_address)\n" +
-                    "values ((select u.user_id from users as u where user_email = ? and u.user_firstname = ? and u.user_lastname = ?),\n" +
-                    "NOW(), ?, ?, ?);";
+                    "values (?, NOW(), ?, ?, ?);";
             PreparedStatement userOrderStatement = dbcon.prepareStatement(insertOrderQuery);
-            userOrderStatement.setString(1, email);
-            userOrderStatement.setString(2, firstName);
-            userOrderStatement.setString(3, lastName);
-            userOrderStatement.setString(4, String.format("%.2f", totalPrice));
-            userOrderStatement.setString(5, shippingMethod);
+            userOrderStatement.setInt(1, userId);
+            userOrderStatement.setString(2, String.format("%.2f", totalPrice));
+            userOrderStatement.setString(3, shippingMethod);
 
             String shippingAddress = street + ", " + city + ", " + state;
-            userOrderStatement.setString(6, shippingAddress);
+            userOrderStatement.setString(4, shippingAddress);
             userOrderStatement.executeUpdate();
 
             // Insert into order product detail table
