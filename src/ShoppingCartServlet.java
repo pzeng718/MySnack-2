@@ -62,9 +62,6 @@ public class ShoppingCartServlet extends HttpServlet {
 
         String action = request.getParameter("action");
         HashMap<String, ArrayList<String>> items = (HashMap<String, ArrayList<String>>) session.getAttribute("items");
-        for(String key : request.getParameterMap().keySet()){
-            System.out.println(key + ": " + request.getParameter(key));
-        }
         if(action.equals("emptyCart")){
             session.setAttribute("itemExists", false);
             session.setAttribute("items", null);
