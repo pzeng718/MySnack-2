@@ -35,4 +35,3 @@ Our website contains:
       <li> Finally type <code>quit;</code> to quit mysql</li>
     </ol>
     The above commands do not have to be followed, if you do not want to create a new user, but you need to go to the <code>context.xml</code> file under <code>WebContent/META-INF</code> to change the username and password for mysql.
-4) <strong>We deployed the project on Aws, here is the link :</strong>
