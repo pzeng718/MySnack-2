@@ -236,17 +236,17 @@ h3 {
   display: flex;
 }
 
-/*div[class^='star-widget'], div[class*=' star-widget'] input{*/
-/*  display: none;*/
-/*}*/
+.rating-container .star-widget input{
+  display: none;
+}
 
-/*div[class^='star-widget'], div[class*=' star-widget'] label{*/
-/*  font-size: 15px;*/
-/*  color: black;*/
-/*  padding: 10px;*/
-/*  float: right;*/
-/*  transition: all 0.2s ease;*/
-/*}*/
+.star-widget label{
+  font-size: 15px;
+  color: black;
+  padding: 10px;
+  float: right;
+  transition: all 0.2s ease;
+}
 
 input:not(:checked) ~ label:hover, input:not(:checked) ~ label:hover ~ label{
   color: #ffdd44;
