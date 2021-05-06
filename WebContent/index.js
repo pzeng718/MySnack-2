@@ -37,6 +37,7 @@ function onHamburgerMenuClick() {
 
 const row = `
     <div class="row">
+        <div class="col-sm">:order_id</div>
         <div class="col-sm">:product_name</div>
         <div class="col-sm">:unit_price</div>
         <div class="col-sm">:select_amount</div>
@@ -51,30 +52,20 @@ const row = `
 function handleRecentlyBoughtItemsData(resultDataString) {
   // let productHtml = '<div class="container">';
   let appendedElem = '';
+  let index = 1;
   for (let product of resultDataString[1]) {
     let newRow = row;
+    newRow = newRow.replace(':order_id', product.order_id);
     newRow = newRow.replace(':product_name', product.name);
     newRow = newRow.replace(':unit_price', product.price);
     newRow = newRow.replace(':select_amount', product.selected_amount);
-    newRow = newRow.replace(':ratings', "<div class=\"rating-container\">\n" +
-        "        <div class=\"star-widget\">\n" +
-        "            <input type=\"radio\" name=\"rate\" id=\"rate-5\">\n" +
-        "            <label for=\"rate-5\" class=\"fas fa-star\"></label>\n" +
-        "            <input type=\"radio\" name=\"rate\" id=\"rate-4\">\n" +
-        "            <label for=\"rate-4\" class=\"fas fa-star\"></label>\n" +
-        "            <input type=\"radio\" name=\"rate\" id=\"rate-3\">\n" +
-        "            <label for=\"rate-3\" class=\"fas fa-star\"></label>\n" +
-        "            <input type=\"radio\" name=\"rate\" id=\"rate-2\">\n" +
-        "            <label for=\"rate-2\" class=\"fas fa-star\"></label>\n" +
-        "            <input type=\"radio\" name=\"rate\" id=\"rate-1\">\n" +
-        "            <label for=\"rate-1\" class=\"fas fa-star\"></label>\n" +
-        "        </div>\n" +
-        "    </div>");
+    newRow = newRow.replace(':ratings', '<input type="range" value="1" min="1" max="5" oninput="this.nextElementSibling.value = this.value">\n' +
+        '<output>1</output>');
     // newRow = newRow.replace(':created_at', product.created_at);
     // newRow = newRow.replace(':order_total_price', product.order_total_price);
     // newRow = newRow.replace(':shipping_address', product.order_shipping_address);
     // newRow = newRow.replace(':shipping_method', product.order_shipping_method);
-
+    index ++;
     appendedElem = `${appendedElem} \n ${newRow}`;
   }
 

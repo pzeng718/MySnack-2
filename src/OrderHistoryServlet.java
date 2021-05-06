@@ -50,7 +50,7 @@ public class OrderHistoryServlet extends HttpServlet {
         try{
             Connection connect = dataSource.getConnection();
             String query = new StringBuilder()
-                    .append("select p.name, p.price, op.selected_amount, o.created_at, o.order_total_price, o.order_shipping_address, o.order_shipping_method")
+                    .append("select o.order_id, p.name, p.price, op.selected_amount, o.created_at, o.order_total_price, o.order_shipping_address, o.order_shipping_method")
                     .append("\n from order_user o join order_productdetail op on o.order_id = op.order_id")
                     .append("\n join products p on op.id = p.id where o.order_id = op.order_id and op.id = p.id and o.user_id = ?")
                     .append("\n order by o.created_at desc")
@@ -60,6 +60,7 @@ public class OrderHistoryServlet extends HttpServlet {
             ResultSet result = ps.executeQuery();
             JsonArray jsonArr = new JsonArray();
             while(result.next()) {
+                String orderId = result.getString("order_id");
                 String productName = result.getString("name");
                 String productUnitPrice = result.getString("price");
                 String selectAmount = result.getString("selected_amount");
@@ -70,6 +71,7 @@ public class OrderHistoryServlet extends HttpServlet {
 
 
                 JsonObject jsonProductObject = new JsonObject();
+                jsonProductObject.addProperty("order_id", orderId);
                 jsonProductObject.addProperty("name", productName);
                 jsonProductObject.addProperty("price", productUnitPrice);
                 jsonProductObject.addProperty("selected_amount", selectAmount);
